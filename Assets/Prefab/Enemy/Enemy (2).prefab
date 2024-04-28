@@ -213,6 +213,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  damageMaterial: {fileID: 2100000, guid: fa5b19a407f8bfb4d8ab2bf333bbe2e7, type: 2}
 --- !u!70 &8908296515748136916
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

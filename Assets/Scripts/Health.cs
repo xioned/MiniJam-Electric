@@ -18,7 +18,14 @@ public class Health : MonoBehaviour
     public void Decreasehealth(int amount)
     {
         currentHealthamount -= amount;
+        StartCoroutine(ChangeMaterial());
         if (currentHealthamount > 0) { return; }
         OnHealthZero?.Invoke();
+    }
+
+    private IEnumerator ChangeMaterial(){
+        GetComponent<SpriteRenderer>().material = damageMaterial;
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<SpriteRenderer>().material = defaultMaterial;
     }
 }
