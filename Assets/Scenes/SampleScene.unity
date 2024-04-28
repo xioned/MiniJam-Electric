@@ -1367,7 +1367,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 0.99956447
+    height: 1
   near clip plane: 0
   far clip plane: 1000
   field of view: 60
@@ -2057,13 +2057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecee88a5204d20bc9bb25fcaf8642e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showHandyFeatures: 1
-  showBehaviorsAsComponents: 0
-  foldoutGroup: 1
-  mainCamera: {fileID: 0}
-  _canvas: {fileID: 0}
-  sceneMFObjects: []
-  canvasRenderMode: 0
 --- !u!1 &690941322
 GameObject:
   m_ObjectHideFlags: 0
