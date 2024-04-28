@@ -10,7 +10,7 @@ public class UiRewardCard : MonoBehaviour, IPointerClickHandler
         rewardManager.SetPlaceableObject(rewards,this);
     }
 }
-
+[System.Serializable]
 public struct Reward
 {
     public int id;

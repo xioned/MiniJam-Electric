@@ -8,7 +8,7 @@ public class Turret3Ammo : MonoBehaviour
     public TurretAI_3 turretAI;
     private void OnEnable()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(9.470085f, 0.2688754f), transform.rotation.eulerAngles.z, mask);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(11, 0.3f), transform.rotation.eulerAngles.z, mask);
         turretAI.DamageEnemy(colliders);
     }
 }

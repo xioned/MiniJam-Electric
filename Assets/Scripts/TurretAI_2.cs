@@ -18,6 +18,7 @@ public class TurretAI_2 : MonoBehaviour
     [Header("Power")]
     public int powerCostingAmount;
     Vector3 shootDirection;
+    public GameObject projectile;
     private void Start()
     {
         targetHandler = GetComponent<TurretAiTargetHandler>();
@@ -32,22 +33,38 @@ public class TurretAI_2 : MonoBehaviour
 
     private void RotateBarrel()
     {
-        shootDirection = targetHandler.currentTargetedEnemy.transform.position - barrel.position;
-        float targetAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-        barrel.rotation = Quaternion.Lerp(barrel.rotation, Quaternion.Euler(0, 0, targetAngle), turretRotationSpeed * Time.deltaTime);
-        FireProjectile();
+        Vector3 direction = targetHandler.currentTargetedEnemy.transform.position - barrel.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        barrel.rotation = Quaternion.RotateTowards(barrel.transform.rotation, targetRotation, turretRotationSpeed * Time.deltaTime);
+        if (Vector3.Angle(barrel.transform.right, direction) < 0.1f)
+        {
+            FireProjectile();
+        }
     }
     private void FireProjectile()
     {
         if (timer > fireRate)
         {
-            if (Vector3.Cross(shootDirection, projectileSpawnPos.position).z > 0.01f) { return; }
-            AudioManager.PlaySFX(shootAudio);
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPos.position, projectileSpawnPos.rotation);
-            Vector2 direction = (targetHandler.currentTargetedEnemy.transform.position - projectileSpawnPos.position).normalized;
-            projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
-            projectileSpawnPos.GetChild(0).gameObject.SetActive(true);
+            projectile = Instantiate(projectilePrefab, projectileSpawnPos.position, projectileSpawnPos.rotation);
+            StartCoroutine(ShootProjectileRoutine(projectile));
             timer = 0;
         }
+    }
+    IEnumerator ShootProjectileRoutine(GameObject projectile)
+    {
+        AudioManager.PlaySFX(shootAudio);
+        while (projectile.transform.childCount > 0)
+        {
+            Transform projectileChild = projectile.transform.GetChild(0);
+            projectileChild.SetParent(null);
+            projectileChild.position = projectileSpawnPos.position;
+            projectileChild.gameObject.SetActive(true);
+            projectileChild.GetComponent<Rigidbody2D>().velocity = barrel.transform.right * projectileSpeed;
+            yield return new WaitForSeconds(0.12f);
+        }
+        projectileSpawnPos.GetChild(0).gameObject.SetActive(true);
+        Destroy(projectile);
     }
 }

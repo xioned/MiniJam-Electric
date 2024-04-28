@@ -41,11 +41,15 @@ public class TurretAI_3 : MonoBehaviour
     }
     private void RotateBarrel()
     {
-        shootDirection = targetHandler.currentTargetedEnemy.transform.position - barrel.position;
-        float targetAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-        barrel.rotation = Quaternion.Lerp(barrel.rotation, Quaternion.Euler(0, 0, targetAngle), turretRotationSpeed * Time.deltaTime);
-        if (Vector3.Cross(shootDirection, projectileSpawnPos.position).z > 0.01f) { return; }
-        FireProjectile();
+        Vector3 direction = targetHandler.currentTargetedEnemy.transform.position - barrel.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        barrel.rotation = Quaternion.RotateTowards(barrel.transform.rotation, targetRotation, turretRotationSpeed * Time.deltaTime);
+        if (Vector3.Angle(barrel.transform.right, direction) < 0.1f)
+        {
+            FireProjectile();
+        }
     }
     private void FireProjectile()
     {
