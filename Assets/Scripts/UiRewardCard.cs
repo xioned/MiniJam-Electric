@@ -1,18 +1,28 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UiRewardCard : MonoBehaviour, IPointerClickHandler
 {
     public RewardManager rewardManager;
-    public Reward rewards;
+    public Reward reward;
+    public Image cardImage;
+    public TextMeshProUGUI itemName;
+    public TextMeshProUGUI quantity;
+    public TextMeshProUGUI description;
     public void OnPointerClick(PointerEventData eventData)
     {
-        rewardManager.SetPlaceableObject(rewards,this);
+        rewardManager.SetPlaceableObject(reward,this);
     }
-}
-[System.Serializable]
-public struct Reward
-{
-    public int id;
-    public int quantity;
+
+    public void SetCardDerails(Reward reward)
+    {
+        this.reward = reward;
+        cardImage.sprite = reward.cardSprite;
+        itemName.text = reward.name;
+        quantity.text = "x"+reward.quantity.ToString();
+        description.text = reward.description;
+    }
 }

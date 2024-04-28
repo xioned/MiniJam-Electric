@@ -5136,6 +5136,7 @@ GameObject:
   - component: {fileID: 8129064545515347814}
   - component: {fileID: 7466520694681343347}
   - component: {fileID: 4854184609244766476}
+  - component: {fileID: 1659898268997236983}
   m_Layer: 8
   m_Name: Turret2
   m_TagString: Untagged
@@ -5166,7 +5167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7702242323509997745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c21c9b92338e3ad4496316790a3373ac, type: 3}
   m_Name: 
@@ -5240,7 +5241,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7702242323509997745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -5311,3 +5312,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTargetedEnemy: {fileID: 0}
   enemiesInShootRange: []
+  canTarget: 1
+--- !u!114 &1659898268997236983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702242323509997745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d960e90a4eed104bbdb2cf38254222c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerConsumeAmount: 30
+  OnPowerConsume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7293538332375380247}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8129064545515347814}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

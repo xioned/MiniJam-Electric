@@ -6,11 +6,11 @@ public class ObjectPlaceManager : MonoBehaviour
     public List<GameObject> placeableObjectPrefabs;
     public List<GameObject> placeableObjectGhostPrefabs;
     public EnemyWaveManager enemyWaveManager;
-    int quantity;
     GameObject currentGhostPrefab;
     Camera currentCamera;
     Grid grid;
     public List<string> notPlaceableTileList = new();
+    public List<GameObject> placedObjectList = new();
     public Reward selectedReward;
     private void Awake()
     {
@@ -39,14 +39,36 @@ public class ObjectPlaceManager : MonoBehaviour
             }
             else
             {
-                Instantiate(placeableObjectPrefabs[selectedReward.id], new Vector2(placePos.x + .5f, placePos.y + .5f),Quaternion.identity);
+                GameObject spawnedObject = Instantiate(placeableObjectPrefabs[selectedReward.id], new Vector2(placePos.x + .5f, placePos.y + .5f),Quaternion.identity);
+                //CheckNeighbourBuilds(spawnedObject, placePos, selectedReward.id);
                 selectedReward.quantity -= 1;
                 notPlaceableTileList.Add(tilePos);
+                placedObjectList.Add(spawnedObject);
                 if (selectedReward.quantity > 0) { return; }
                 selectedReward.id = -1;
                 Destroy(currentGhostPrefab);
                 enemyWaveManager.GenerateWave();
             }
+        }
+    }
+
+    public void CheckNeighbourBuilds(GameObject spawnedObject,Vector2 placePos,int id)
+    {
+        if (notPlaceableTileList.Contains(new Vector2(placePos.x+1, placePos.y).ToString()))
+        {
+            
+        }
+        if (notPlaceableTileList.Contains(new Vector2(placePos.x -1, placePos.y).ToString()))
+        {
+
+        }
+        if (notPlaceableTileList.Contains(new Vector2(placePos.x, placePos.y+1).ToString()))
+        {
+
+        }
+        if (notPlaceableTileList.Contains(new Vector2(placePos.x + 1, placePos.y-1).ToString()))
+        {
+
         }
     }
 }

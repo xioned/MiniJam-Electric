@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 9099096965235291126}
   - component: {fileID: 2164894777208193152}
   - component: {fileID: 2810189189547780999}
+  - component: {fileID: 9056563224194709361}
   m_Layer: 8
   m_Name: Turret3
   m_TagString: Untagged
@@ -431,7 +432,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8500914075640222864}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -502,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTargetedEnemy: {fileID: 0}
   enemiesInShootRange: []
+  canTarget: 1
 --- !u!114 &2810189189547780999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,7 +511,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8500914075640222864}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec7e2add99f43eb45abb38eb3af11b72, type: 3}
   m_Name: 
@@ -524,3 +526,43 @@ MonoBehaviour:
   shootAudio: {fileID: 8300000, guid: 8bc7b99c154512c4da363a88cdd82e7a, type: 3}
   powerCostingAmount: 20
   damageAmount: 20
+--- !u!114 &9056563224194709361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500914075640222864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d960e90a4eed104bbdb2cf38254222c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerConsumeAmount: 60
+  OnPowerConsume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7177917883911930607}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2810189189547780999}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

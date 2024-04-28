@@ -1,10 +1,11 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
-    
-    public UiRewardCard[] rewardCards;
+    public Reward[] turretRewards;
+    public Reward[] powerGeneratorRewards;
+    public UiRewardCard[] uiRewardCards;
     public ObjectPlaceManager placeManager;
     private void Start()
     {
@@ -12,11 +13,24 @@ public class RewardManager : MonoBehaviour
     }
     public void CreateReward()
     {
+        CreatePowerGeneratorReward();
+        CreateTurretReward();
         gameObject.SetActive(true);
-        for (int i = 0; i < rewardCards.Length; i++)
+        for (int i = 0; i < uiRewardCards.Length; i++)
         {
-            rewardCards[i].gameObject.SetActive(true);
+            uiRewardCards[i].gameObject.SetActive(true);
         }
+    }
+
+    private void CreatePowerGeneratorReward()
+    {
+        int randReward = Random.Range(0, powerGeneratorRewards.Length);
+        uiRewardCards[1].SetCardDerails(powerGeneratorRewards[randReward]);
+    }
+    private void CreateTurretReward()
+    {
+        int randReward = Random.Range(0, turretRewards.Length);
+        uiRewardCards[0].SetCardDerails(turretRewards[randReward]);
     }
 
     public void SetPlaceableObject(Reward rewards,UiRewardCard rewardCard)
@@ -24,4 +38,17 @@ public class RewardManager : MonoBehaviour
         placeManager.SetPlaceableObject(rewards);
         gameObject.SetActive(false);
     }
+
+    
+}
+
+[System.Serializable]
+public struct Reward
+{
+    public string name;
+    public int id;
+    public int quantity;
+    public Sprite cardSprite;
+    [TextArea] 
+    public string description;
 }
